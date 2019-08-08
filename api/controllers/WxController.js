@@ -18,11 +18,12 @@ module.exports = {
       let sha = sha1(str);
       console.log(sha, signature);
       if(sha == signature){
-        // this.body = echostr;
+        console.log( echostr )
+        return res.status(200).send(echostr);
       } else {
-        // this.body = 'wrong';
+        console.log(  'Failed' )
+        return res.status(404).send('');
       }
-      res.ok();
     }
 
 };
