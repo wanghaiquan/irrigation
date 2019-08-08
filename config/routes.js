@@ -21,7 +21,8 @@ module.exports.routes = {
 
   '/': { view: 'pages/homepage' },
   'POST /queue/put': { action: 'queue/put' },
-  'GET /queue/get': { action: 'queue/get' }
+  'GET /queue/get': { action: 'queue/get' },
+  'GET /wx/token': { action: 'wx/token' }
   /***************************************************************************
   *                                                                          *
   * More custom routes here...                                               *
