@@ -1,0 +1,22 @@
+<script type="text/javascript">
+  var onBridgeReady = function() {
+    WeixinJSBridge.invoke('getBrandWCPayRequest', {
+      "appId": "<%= data.appId %>",
+      "timeStamp": "<%= data.timeStamp %>",
+      "nonceStr": "<%= data.nonceStr %>",
+      "package": "prepay_id=<%= data.package %>",
+      "signType": "MD5",
+      "paySign": "<%= data.paySign %>",
+    }, function(res) {
+      if (res.err_msg == "get_brand_wcpay_request:ok") {
+        alert(res.err_msg); //成功页面 } else if (res.err_msg == "get_brand_wcpay_request:cancel") { alert(res.err_msg); //成功页面 } else if (res.err_msg == "get_brand_wcpay_request:fail") { alert(res.err_msg); //成功页面 } else {
+
+      }
+    });
+  };
+  if (document.addEventListener) {
+    document.addEventListener("WeixinJSBridgeReady", onBridgeReady, true);
+  } else {
+    document.attachEvent("onWeixinJSBridgeReady", onBridgeReady);
+  }
+</script>

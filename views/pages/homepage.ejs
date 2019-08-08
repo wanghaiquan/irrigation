@@ -1,0 +1,78 @@
+<div class="container">
+  <!-- Top Navigation -->
+  <div class="codrops-top clearfix">
+  </div>
+  <header class="codrops-header">
+    <h1>智能抽水雾化 <span>通过本系统，可以延伸应用到农业，家居领域。</span></h1>
+  </header>
+  <div class="main clearfix">
+    <div class="column">
+      <p class="small">通过点击按钮来体验模型的工作原理</p>
+      <button id="notification-trigger" class="progress-button">
+        <span class="content">开启系统</span>
+        <span class="progress"></span>
+      </button>
+
+    </div>
+    <div class="column">
+
+    </div>
+  </div>
+  <!-- Related demos -->
+
+</div><!-- /container -->
+<script src="js/classie.js"></script>
+<script src="js/notificationFx.js"></script>
+<script>
+  (function() {
+    function getTimestamp() {
+      return parseInt(new Date().getTime() / 1000) + ''
+    }
+
+
+  
+
+    var bttn = document.getElementById('notification-trigger');
+    // make sure..
+    bttn.disabled = false;
+
+    bttn.addEventListener('click', function() {
+      // 写入一个队列
+
+      $.ajax({
+          method: "POST",
+          url: "/queue/put",
+          data: {
+            'power': 'off'
+          }
+        })
+        .done(function(msg) {
+          console.log(msg);
+        });
+      // simulate loading (for demo purposes only)
+      classie.add(bttn, 'active');
+      setTimeout(function() {
+
+        classie.remove(bttn, 'active');
+
+        // create the notification
+        var notification = new NotificationFx({
+          message: '<p>系统已经开启,请注意水量，防止电机空转.</p>',
+          layout: 'growl',
+          effect: 'scale',
+          type: 'notice', // notice, warning, error or success
+          onClose: function() {
+            bttn.disabled = false;
+          }
+        });
+
+        // show the notification
+        notification.show();
+
+      }, 1200);
+
+      // disable the button (for demo purposes only)
+      this.disabled = true;
+    });
+  })();
+</script>
