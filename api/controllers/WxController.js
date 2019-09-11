@@ -16,12 +16,9 @@ module.exports = {
       const echostr = req.query.echostr;
       let str = [token, timestamp, nonce].sort().join('');
       let sha = sha1(str);
-      console.log(signature,sha, signature);
       if(sha == signature){
-        console.log( echostr )
         return res.status(200).send(echostr);
       } else {
-        console.log(  'Failed' )
         return res.status(404).send('');
       }
     }
